@@ -30,9 +30,17 @@ jobs:
         with:
           name: website-files
           path: dist
+          
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy
-        run: echo "Deploying..."
+      - name: Get build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: website-files
+      - name: List downloaded files
+        run: ls -l
+      - name: Simulate deployment
+        run: echo "Deploying website files to web server..."
+
